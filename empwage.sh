@@ -3,6 +3,9 @@ echo "welcome to employeewage "
 isPresentfulltime=2;
 ispresentparttime=1;
 emprateperhr=20;
+numWorkingDays=20;
+for (( day=1; day<=$numWorkingDays; day++ ))
+do
 empcheck=$((RANDOM%3));
 case $empcheck in
     $ispresentfulltime)
@@ -23,3 +26,7 @@ case $empcheck in
 
 ;;
 esac
+salary=$(($emphrs*$emprateperhr))
+totalsalary=$(($numWorkingDays*$salary))
+done
+echo $totalsalary
