@@ -1,11 +1,15 @@
-#!/bin/bash -x
+#!/bin/bash 
 echo "welcome to employeewage "
 isPresentfulltime=2;
 ispresentparttime=1;
 emprateperhr=20;
-numWorkingDays=20;
-for (( day=1; day<=$numWorkingDays; day++ ))
+WorkingHours=100
+WorkingDays=20
+totalEmpHrs=0
+totalWorkingDays=0
+while [[ $totalEmpHrs -le $WorkingHours && $totalWorkingDays -le $WorkingDays ]]
 do
+        totalWorkingDays=$(($totalWorkingDays+1))
 empcheck=$((RANDOM%3));
 case $empcheck in
     $ispresentfulltime)
@@ -21,12 +25,13 @@ case $empcheck in
      echo $salary
     ;;
     *)
+     emphrs=0;
     echo "salary=0"
     echo "employee is absent"
 
 ;;
 esac
-salary=$(($emphrs*$emprateperhr))
-totalsalary=$(($numWorkingDays*$salary))
+totalEmpHrs=$(($totalEmpHrs+$emphrs))
+totalSalary=$(($totalEmpHrs*$emprateperhr))
 done
-echo $totalsalary
+echo "total sal" $totalSalary
