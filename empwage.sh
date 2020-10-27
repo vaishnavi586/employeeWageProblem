@@ -7,11 +7,9 @@ WorkingHours=100
 WorkingDays=20
 totalEmpHrs=0
 totalWorkingDays=0
-while [[ $totalEmpHrs -le $WorkingHours && $totalWorkingDays -le $WorkingDays ]]
-do
-        totalWorkingDays=$(($totalWorkingDays+1))
-empcheck=$((RANDOM%3));
-case $empcheck in
+function getWorkingHours() {
+
+case $1 in
     $ispresentfulltime)
      emprateperhr=20;
      emphrs=8; 
@@ -31,7 +29,12 @@ case $empcheck in
 
 ;;
 esac
+}
+ while [[ $totalEmpHrs -le $WorkingHours && $totalWorkingDays -le $WorkingDays ]]
+do
+totalWorkingDays=$(($totalWorkingDays+1))
+emphrs=$(getWorkingHours $((RANDOM%3)) )
 totalEmpHrs=$(($totalEmpHrs+$emphrs))
-totalSalary=$(($totalEmpHrs*$emprateperhr))
+totalSalary=$(($totalsalary+($totalEmpHrs*$emprateperhr)))
 done
 echo "total sal" $totalSalary
