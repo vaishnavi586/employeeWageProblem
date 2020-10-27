@@ -1,4 +1,5 @@
-#!/bin/bash 
+
+#!/bin/bash
 echo "welcome to employeewage "
 isPresentfulltime=2;
 ispresentparttime=1;
@@ -12,7 +13,7 @@ function getWorkingHours() {
 case $1 in
     $ispresentfulltime)
      emprateperhr=20;
-     emphrs=8; 
+     emphrs=8;
      salary=$(($emphrs*$emprateperhr));
       echo $salary
      echo "employee is present"
@@ -30,11 +31,22 @@ case $1 in
 ;;
 esac
 }
+function getDailyWages() {
+        totalWorkHours=$1
+        wages=$(( $totalWorkHours*$emprateperhr ))
+        echo $wages
+
+
+
+}
  while [[ $totalEmpHrs -le $WorkingHours && $totalWorkingDays -le $WorkingDays ]]
 do
 totalWorkingDays=$(($totalWorkingDays+1))
 emphrs=$(getWorkingHours $((RANDOM%3)) )
 totalEmpHrs=$(($totalEmpHrs+$emphrs))
-totalSalary=$(($totalsalary+($totalEmpHrs*$emprateperhr)))
+ DailyWages[$totalWorkingDays]="$( getDailyWages $emphrs )"
 done
-echo "total sal" $totalSalary
+totalSalary="$( getDailyWages $totalEmpHrs )"
+echo "daily wages:" ${DailyWages[@]}
+
+echo "all keys   :" ${!DailyWages[@]}
